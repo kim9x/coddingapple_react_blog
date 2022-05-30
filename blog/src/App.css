@@ -3,11 +3,11 @@
 }
 
 .black-nav {
-  display: flex;
   background: black;
   width: 100%;
+  display: flex;
   color: white;
-  padding-left: 20px;
+  padding: 20px;
 }
 
 .App-logo {
