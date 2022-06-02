@@ -44,8 +44,27 @@ function App() {
         <h4>{글제목[2]}</h4>
         <p>2월 17일 발행</p>
       </div>
+
+      <Modal></Modal>
     </div >
   );
+}
+
+// 아래처럼 컴포넌트를 만들어도 됨
+const Modal2 = () => {
+  return (
+    <div></div>
+  )
+}
+
+function Modal() {
+  return (
+    <div className="modal">
+      <h4>제목</h4>
+      <p>날짜</p>
+      <p>상세내용</p>
+    </div>
+  )
 }
 
 export default App;
