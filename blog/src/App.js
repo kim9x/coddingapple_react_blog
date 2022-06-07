@@ -11,6 +11,7 @@ function App() {
   let [따봉, 따봉변경] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
   let [title, setTitle] = useState(0);
+  let [입력값, 입력값변경] = useState('');
 
   function modalSwitch() {
     if (modal == true) {
@@ -25,6 +26,22 @@ function App() {
     let copy = [...따봉];
     copy[i] = copy[i] + 1
     따봉변경(copy);
+  }
+
+  function addTitle(inputTitle) {
+    let titleCopy = [...글제목];
+    titleCopy.push(inputTitle)
+    글제목변경(titleCopy);
+
+    let 따봉Copy = [...따봉];
+    따봉Copy.push(0);
+    따봉변경(따봉Copy);
+  }
+
+  function removeTitle(idx) {
+    let copy = [...글제목];
+    copy.splice(idx, 1);
+    글제목변경(copy);
   }
 
   return (
@@ -43,11 +60,23 @@ function App() {
         글제목.map(function (a, i) {
           return (<div className="list" key={i}>
             {/* <h4>{ a }</h4> */}
-            <h4 onClick={() => { setModal(!modal); setTitle(i); }}>{글제목[i]} <span onClick={() => { clickDdabong(i) }}>👍</span> {따봉[i]} </h4>
+            <h4 onClick={() => { setModal(!modal); setTitle(i); }}>
+              {글제목[i]}
+              <span onClick={(e) => { e.stopPropagation(); clickDdabong(i); }}>👍</span> {따봉[i]}
+            </h4>
             <p>2월 17일 발행</p>
+            <button onClick={(e) => { e.stopPropagation(); removeTitle(i); }}>삭제</button>
           </div>)
         })
       }
+
+      <input onChange={(e) => {
+        입력값변경(e.target.value)
+        console.log(입력값);
+      }
+      }></input>
+
+      <button onClick={() => { addTitle(입력값) }}>글발행</button>
 
       {
         modal == true ? <Modal title={title} color={'skyblue'} 글제목={글제목} 글제목변경={글제목변경} /> : null
