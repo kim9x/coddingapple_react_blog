@@ -2,7 +2,7 @@
 
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 function App() {
 
@@ -81,6 +81,7 @@ function App() {
       {
         modal == true ? <Modal title={title} color={'skyblue'} 글제목={글제목} 글제목변경={글제목변경} /> : null
       }
+      <Profile />
     </div >
   );
 }
@@ -102,6 +103,27 @@ function Modal(props) {
       <button>글수정</button>
     </div>
   )
+}
+
+class Profile extends React.Component {
+  constructor() {
+    super();
+    this.state = { name: 'Kim', age: 30 }
+  }
+
+  changeName() {
+    this.setState({ name: 'Park"' })
+  }
+
+  render() {
+    return (
+      <div>
+        <h3>프로필입니다.</h3>
+        <p>저는 {this.state.name} 입니다.</p>
+        <button onClick={() => this.changeName.bind(this)}>버튼</button>
+      </div >
+    )
+  }
 }
 
 export default App;
