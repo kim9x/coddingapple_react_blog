@@ -26,40 +26,26 @@ function App() {
 
       <div className="container">
         <div className="row">
-          {/* <div className="col-md-4">
-            <img src={process.env.PUBLIC_URL + '/logo192.png'} width='80%' />
-            <h4>{shoes[0].title}</h4>
-            <p>{shoes[0].price}</p>
-          </div> */}
           {
             shoes.map(function (a, i) {
               return (
-                <Modal picUrl={'https://codingapple1.github.io/shop/shoes' + (i + 1) + '.jpg'} title={shoes[i].title} price={shoes[i].price} />
+                <Card shoes={shoes[i]} i={i} />
               )
             })
           }
-          {/* <Modal picUrl={'/logo192.png'} titld={shoes[0].title} price={shoes[0].price} /> */}
-          {/* <div className="col-md-4">
-            <img src={process.env.PUBLIC_URL + 'https://codingapple1.github.io/shop/shoes2.jpg'} width='80%' />
-            <h4>{shoes[1].title}</h4>
-            <p>shoes[1].price</p></div>
-          <div className="col-md-4">
-            <img src='https://codingapple1.github.io/shop/shoes3.jpg' width='80%' />
-            <h4>shoes[2].title</h4>
-            <p>shoes[2].price</p></div> */}
         </div>
       </div>
     </div >
   );
 }
 
-function Modal(props) {
+function Card(props) {
   console.log('props: ', props);
   return (
     <div className="col-md-4">
-      <img src={process.env.PUBLIC_URL + props.picUrl} width='80%' />
-      <h4>{props.title}</h4>
-      <p>{props.price}</p>
+      <img src={'https://codingapple1.github.io/shop/shoes' + (props.i + 1) + '.jpg'} width="80%" />
+      <h4>{props.shoes.title}</h4>
+      <p>{props.shoes.price}</p>
     </div>
   )
 }
