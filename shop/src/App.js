@@ -4,6 +4,8 @@ import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 import bg from './img/bg.png'
 import { useState } from 'react';
 import data from './data.js';
+import { Routes, Route, Link } from 'react-router-dom';
+import Detail from './routes/Detail.js';
 
 
 function App() {
@@ -16,25 +18,35 @@ function App() {
         <Container>
           <Navbar.Brand href="#home">Finance</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Stock</Nav.Link>
-            <Nav.Link href="#features">Real estate</Nav.Link>
+            <Nav.Link href='/'>홈</Nav.Link>
+            <Nav.Link href="/detail">상세페이지</Nav.Link>
+            {/* <Link to='/'>홈</Link>
+            <Link to='/detail'>상세페이지</Link> */}
           </Nav>
         </Container>
       </Navbar>
 
-      <div className='main-bg' style={{ backgroundImage: 'url(' + bg + ')' }}></div>
 
-      <div className="container">
-        <div className="row">
-          {
-            shoes.map(function (a, i) {
-              return (
-                <Card shoes={shoes[i]} i={i} />
-              )
-            })
-          }
-        </div>
-      </div>
+
+      <Routes>
+        <Route path="/" element={
+          <><div className='main-bg' style={{ backgroundImage: 'url(' + bg + ')' }}></div>
+
+            <div className="container">
+              <div className="row">
+                {
+                  shoes.map(function (a, i) {
+                    return (
+                      <Card shoes={shoes[i]} i={i} />
+                    )
+                  })
+                }
+              </div>
+            </div></>} />
+        <Route path='/detail' element={<Detail />} />
+      </Routes>
+
+
     </div >
   );
 }
