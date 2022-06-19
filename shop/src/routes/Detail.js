@@ -19,14 +19,33 @@ import styled from 'styled-components';
 
 function Detail(props) {
 
-    useEffect(() => {
-        setTimeout(() => {
-            setAlert(false);
-        }, 2000);
-    })
-
     let [count, setCount] = useState(0);
-    let [alert, setAlert] = useState(true);
+    // let [alert, setAlert] = useState(true);
+    let [num, setNum] = useState('');
+
+    useEffect(() => {
+        if (isNaN(num) == true) {
+            alert('그러지마세요')
+        }
+
+    }, [num])
+
+    // useEffect(() => {
+    //     let a = setTimeout(() => {
+    //         setAlert(false);
+    //         console.log(1);
+    //     }, 2000)
+
+    //     return (() => {
+    //         clearTimeout(a);
+
+    //     })
+    //     // setTimeout(() => {
+    //     //     setAlert(false);
+    //     //     console.log(1);
+    //     // }, 2000);
+    // }, [])
+
 
     let { id } = useParams();
 
@@ -56,6 +75,9 @@ function Detail(props) {
                     <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
                 </div>
                 <div className="col-md-6">
+                    <input onChange={((e) => {
+                        setNum(e.target.value)
+                    })} />
                     <h4 className="pt-5">{props.shoes[findItem.id].title}</h4>
                     <p>{props.shoes[findItem.id].content}</p>
                     <p>{props.shoes[findItem.id].price}</p>
