@@ -11,7 +11,7 @@ import axios from 'axios'
 
 function App() {
 
-  let [shoes] = useState(data);
+  let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
 
   return (
@@ -46,14 +46,40 @@ function App() {
               </div>
             </div>
             <button onClick={() => {
+              // 로딩중UI 띄우기~
               axios.get('https://codingapple1.github.io/shop/data2.json')
                 .then((datas) => {
                   console.log(datas.data)
+                  let copy = [...shoes, ...datas.data];
+                  setShoes(copy);
+                  // console.log(shoes)
+                  // 로딩중UI 숨기기~
                 })
                 .catch(() => {
                   console.log('실패함ㅅㄱ')
+                  // 로딩중UI 숨기기~
                 })
-            }}>버튼</button>
+
+
+              // ajax로 post 요청 보내기
+              axios.post('/test', { name: 'kim' })
+
+              // 한번에 2개의 url에 ajax 요청하기
+              Promise.all([axios.get('/url1'), axios.get('/url2')])
+                .then(() => {
+
+                })
+              // 아래처럼 따옴표로 감싼 후 요청 시
+              // array, object도 주고받기 가능 (json 형식임)
+              // axios가 json 형식을 자동변환 해줌.
+              // "{"name" : "kim"}"
+
+              // JS 기본 문법인 fetch로 요청하기
+              fetch('https://codingapple1.github.io/shop/data2.json')
+                // fetch를 사용하면 json을 array 혹은 object로 변환하는 코드 필요
+                .then(datas => datas.json)
+                .then(data => { })
+            }}>더보기</button>
           </>
         } />
         <Route path='/detail/:id' element={<Detail shoes={shoes} />} />
