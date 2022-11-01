@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Nav } from 'react-bootstrap';
+
+import { Context1 } from './../App.js'
 
 // let YellowBtn = styled.button`
 //     background: ${props => props.bg};
@@ -20,17 +22,8 @@ import { Nav } from 'react-bootstrap';
 
 function Detail(props) {
 
-    let [fade2, setFade2] = useState('')
+    let { 재고 } = useContext(Context1)
 
-    // useEffect(() => {
-    //     setFade2('end')
-    //     return () => {
-    //         setFade2('')
-    //     }
-    // }, [])
-    // // return <div className={'container start ' + fade2}>
-    // //     {}
-    // // </div>
 
     let [count, setCount] = useState(0);
     // let [alert, setAlert] = useState(true);
@@ -43,22 +36,6 @@ function Detail(props) {
         }
 
     }, [num])
-
-    // useEffect(() => {
-    //     let a = setTimeout(() => {
-    //         setAlert(false);
-    //         console.log(1);
-    //     }, 2000)
-
-    //     return (() => {
-    //         clearTimeout(a);
-
-    //     })
-    //     // setTimeout(() => {
-    //     //     setAlert(false);
-    //     //     console.log(1);
-    //     // }, 2000);
-    // }, [])
 
 
     let { id } = useParams();
@@ -139,6 +116,7 @@ function TabContent({ 탭 }) {
     // }
 
     let [fade, setFade] = useState('')
+    let { 재고 } = useContext(Context1)
 
     useEffect(() => {
         let timeout = setTimeout(() => {
@@ -153,7 +131,7 @@ function TabContent({ 탭 }) {
     }, [탭])
 
     return (<div className={`start ${fade}`}>
-        {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭]}
+        {[<div>{재고}</div>, <div>내용1</div>, <div>내용2</div>][탭]}
     </div>)
 }
 
