@@ -20,6 +20,18 @@ import { Nav } from 'react-bootstrap';
 
 function Detail(props) {
 
+    let [fade2, setFade2] = useState('')
+
+    // useEffect(() => {
+    //     setFade2('end')
+    //     return () => {
+    //         setFade2('')
+    //     }
+    // }, [])
+    // // return <div className={'container start ' + fade2}>
+    // //     {}
+    // // </div>
+
     let [count, setCount] = useState(0);
     // let [alert, setAlert] = useState(true);
     let [num, setNum] = useState('');
@@ -125,7 +137,24 @@ function TabContent({ 탭 }) {
     // } else if (탭 == 2) {
     //     return <div>내용2</div>
     // }
-    return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭]
+
+    let [fade, setFade] = useState('')
+
+    useEffect(() => {
+        let timeout = setTimeout(() => {
+            setFade('end')
+        }, 100)
+
+        // 함수가 실행되기 전에 실행되는 부분 클린 업 함수?
+        return () => {
+            clearTimeout(timeout)
+            setFade('')
+        }
+    }, [탭])
+
+    return (<div className={`start ${fade}`}>
+        {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭]}
+    </div>)
 }
 
 export default Detail;
