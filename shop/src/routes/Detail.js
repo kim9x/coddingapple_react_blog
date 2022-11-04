@@ -2,8 +2,9 @@ import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Nav } from 'react-bootstrap';
-
 import { Context1 } from './../App.js'
+import { addItem } from './../store.js'
+import { useDispatch } from 'react-redux';
 
 // let YellowBtn = styled.button`
 //     background: ${props => props.bg};
@@ -29,6 +30,7 @@ function Detail(props) {
     // let [alert, setAlert] = useState(true);
     let [num, setNum] = useState('');
     let [탭, 탭변경] = useState(0);
+    let dispatch = useDispatch()
 
     useEffect(() => {
         if (isNaN(num) == true) {
@@ -72,7 +74,9 @@ function Detail(props) {
                     <h4 className="pt-5">{props.shoes[findItem.id].title}</h4>
                     <p>{props.shoes[findItem.id].content}</p>
                     <p>{props.shoes[findItem.id].price}</p>
-                    <button className="btn btn-danger">주문하기</button>
+                    <button className="btn btn-danger" onClick={() => {
+                        dispatch(addItem({ id: 1, name: 'Red Knit', count: 1 }))
+                    }}>주문하기</button>
                 </div>
             </div>
 
