@@ -13,6 +13,13 @@ export let Context1 = createContext();
 
 function App() {
 
+  let obj = { name: 'kim' }
+  localStorage.setItem('data', JSON.stringify(obj))
+  let getItem = localStorage.getItem('data')
+
+  console.log(JSON.parse(getItem))
+  // console.log(getItem)
+
   let [shoes, setShoes] = useState(data)
   let [재고] = useState([10, 11, 12])
 
@@ -53,7 +60,7 @@ function App() {
               // 로딩중UI 띄우기~
               axios.get('https://codingapple1.github.io/shop/data2.json')
                 .then((datas) => {
-                  console.log(datas.data)
+                  // console.log(datas.data)
                   let copy = [...shoes, ...datas.data];
                   setShoes(copy);
                   // console.log(shoes)
