@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 import bg from './img/bg.png'
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import data from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './routes/Detail.js';
@@ -12,6 +12,9 @@ import Cart from './routes/Cart.js';
 export let Context1 = createContext();
 
 function App() {
+
+
+
 
   let obj = { name: 'kim' }
   localStorage.setItem('data', JSON.stringify(obj))
@@ -24,6 +27,13 @@ function App() {
   let [재고] = useState([10, 11, 12])
 
   let navigate = useNavigate();
+
+
+  useEffect(() => {
+    if (Array.isArray(localStorage.getItem('watched')))
+      localStorage.setItem('watched', JSON.stringify([]))
+
+  }, [])
 
   return (
     <div className="App">

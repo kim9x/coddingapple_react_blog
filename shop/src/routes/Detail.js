@@ -24,23 +24,35 @@ import { useDispatch } from 'react-redux';
 function Detail(props) {
 
     let { 재고 } = useContext(Context1)
-
-
     let [count, setCount] = useState(0);
     // let [alert, setAlert] = useState(true);
     let [num, setNum] = useState('');
     let [탭, 탭변경] = useState(0);
     let dispatch = useDispatch()
 
-    useEffect(() => {
-        if (isNaN(num) == true) {
-            alert('그러지마세요')
-        }
-
-    }, [num])
-
 
     let { id } = useParams();
+    let 찾은상품 = props.shoes.find(x => x.id == id);
+
+    useEffect(() => {
+
+        // localStorage.setItem('watched', [찾은상품.id])
+
+        let arr = localStorage.getItem('watched')
+        if (arr == null) {
+            arr = []
+        } else {
+            arr = JSON.parse(arr)
+        }
+
+        // arr = JSON.parse(arr);
+        arr.push(찾은상품.id);
+        arr = new Set(arr)
+        arr = Array.from(arr)
+        localStorage.setItem('watched', JSON.stringify(arr))
+
+    }, [])
+
 
     let findItem = props.shoes.find(function (item) {
         return item.id == id;
